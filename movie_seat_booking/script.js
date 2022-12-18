@@ -25,7 +25,7 @@ $container.addEventListener("click", (e) => {
     
     const selectedSeats = document.querySelectorAll('.row .seat.selected');
     const selectedSeatsIndex = [...selectedSeats].map(seat=>[...$usableSeat].indexOf(seat));
-    
+
     saveToLocalStorage('selectedSeatsIndex', JSON.stringify(selectedSeatsIndex))
     calculatePrice();
   }
@@ -33,16 +33,18 @@ $container.addEventListener("click", (e) => {
 // classList.toggle => Removes a given token from the list and returns false. If token doesn't exist it's added and the function returns true.
 
 const init = () =>{
-  const defaultValue = { index: 0 , price : +$movieContainer.querySelector('option').value}
-
-  const {index} = JSON.parse(getDataFromLocalStorage('selectedMovie')) ?? defaultValue
+  // 기존에 선택된 좌석 설정
   const selectedSeatsIndex = JSON.parse(getDataFromLocalStorage('selectedSeatsIndex'));
+  if (selectedSeatsIndex !==null && selectedSeatsIndex.length > 0) {
+    [...$usableSeat].forEach((seat, index)=>{
+      if(selectedSeatsIndex.indexOf(index) > -1) seat.classList.add('selected')
+    });
+  }
+  // 영화 선택
+  const defaultValue = { index: 0 , price : +$movieContainer.querySelector('option').value}
+  const {index} = JSON.parse(getDataFromLocalStorage('selectedMovie')) ?? defaultValue;
+  $movieContainer.selectedIndex = index;
 
-  [...$usableSeat].forEach((seat, index)=>{
-    if(selectedSeatsIndex.indexOf(index) > -1) seat.classList.add('selected')
-  });
-
-  $movieContainer.selectedIndex = index
   calculatePrice();
 }
 
