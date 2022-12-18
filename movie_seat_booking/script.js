@@ -4,18 +4,16 @@ const $movieContainer = document.querySelector('#movie');
 const $selectedSeatCount = document.querySelector('#count');
 const $totalPrice = document.querySelector('#total');
 
-let moviePrice = $movieContainer.value;
+
+const saveToLocalStorage = (key, value)=> localStorage.setItem(key, JSON.stringify(value));
 
 const calculatePrice = () =>{
-    const selectedSeatsCount = document.querySelectorAll('.row .seat.selected').length
-    $selectedSeatCount.innerText  = selectedSeatsCount
-    $totalPrice.innerText = selectedSeatsCount * moviePrice;
+    const selectedSeatsCount = document.querySelectorAll('.row .seat.selected').length;
+    $selectedSeatCount.innerText  = selectedSeatsCount;
+    $totalPrice.innerText = selectedSeatsCount * $movieContainer.value;
 }
-
-$movieContainer.addEventListener('change', (e)=>{
-    moviePrice = e.target.value;
-    calculatePrice();
-})
+//change발생시 selectedIndex도 같이 바뀜
+$movieContainer.addEventListener('change', calculatePrice)
 
 $container.addEventListener("click", (e) => {
   if (e.target.classList.contains("seat") && !e.target.classList.contains('occupied')) {
@@ -23,5 +21,4 @@ $container.addEventListener("click", (e) => {
     calculatePrice();
   }
 });
-
 // classList.toggle => Removes a given token from the list and returns false. If token doesn't exist it's added and the function returns true.
