@@ -11,17 +11,19 @@
     <h1>Exchange Rate Calculator</h1>
     <p>Choose the currency and the amounts to get the exchange rate</p>
     <img src="img/money.png" alt="로고">
-    <div class="currency">
-        <select id="currency_one"></select>
-        <input type="number" id="amount_one" placeholder="0" value="1"  >
-    </div>
-    <div class="section_swap">
-        <button id="swap_btn">Swap</button>
-        <p id="result">1 USD ~ 0.9 EUR</p>
-    </div>
-    <div class="currency">
-        <select id="currency_two"></select>
-        <input type="number" id="amount_two" placeholder="0" value="1">
+    <div class="container">
+        <div class="currency">
+            <select id="currency_one"></select>
+            <input type="number" id="amount_one" placeholder="0" value="1"  >
+        </div>
+        <div class="section_swap">
+            <button id="swap_btn">Swap</button>
+            <p id="rate"></p>
+        </div>
+        <div class="currency">
+            <select id="currency_two"></select>
+            <input type="number" id="amount_two" placeholder="0" value="1">
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
