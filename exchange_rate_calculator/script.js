@@ -5,28 +5,30 @@ const currencyTwo = qs("#currency_two");
 const swapBtn = qs("#swap_btn");
 const compareResult = qs("#result");
 
-const getCurrencyData = async () => {
-  const res = await fetch("/currency.json");
+const getCurrencyData = async (url) => {
+  const res = await fetch(url);
   const data = await res.json();
   return data;
 };
-const addCountryToSelect = (target, data = [],initialIndex = 0) => {
-  data.forEach((currency,index) => {
+const addCountryToSelect = (target, data = [],initialCurrency) => {
+  data.forEach(currency => {
     const option = document.createElement("option");
     option.className = 'currency'
     option.innerText = currency;
     option.value = currency;
     target.appendChild(option);
-    if (initialIndex === index) {
-        target.value = initialIndex === index && currency;
+    if (initialCurrency === currency) {
+        target.value = currency;
     }
   });
 };
 
+
 const init = async () => {
-  const data = await getCurrencyData();
-  addCountryToSelect(currencyOne, data,4);
-  addCountryToSelect(currencyTwo, data,1);
+  const currencyList = await getCurrencyData('currency.json');
+  addCountryToSelect(currencyOne, currencyList, 'KRW');
+  addCountryToSelect(currencyTwo, currencyList, 'USD');
+  const currencyRate = await getCurrencyData(`https://open.er-api.com/v6/latest/KRW`);
 };
 
 window.addEventListener("DOMContentLoaded", init);
