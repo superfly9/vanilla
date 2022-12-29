@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
+* {
+    margin:0;
+    padding:0;
+}
+body {
+    transform: translateX(200px);
+}
+.nav {
+    width:200px;
+    position:fixed;
+    height:100vh;
+}
+.crumb {
+    margin:10px 0;
+    border-bottom:1px solid #000;
+}
+.header {
+    font-family: 'Single Day', cursive;
+    background-color: blueviolet;
+    text-align:center;
+    color:#fff;
+    position:relative;
+}
+.toggle {
+    position:absolute;
+    top:20px;
+    left:20px;
+}
+.container {
+    font-family: 'Single Day', cursive;
+}
