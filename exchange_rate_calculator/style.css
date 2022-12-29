@@ -17,6 +17,17 @@ body {
     grid-template-columns: 2fr 5fr;
     column-gap:10px;
 }
+select {
+    border:1px solid #000;
+    border-radius:5px;
+    padding:10px;
+}
+input[type="number"] {
+    border:1px solid #000;
+    border-radius:5px;
+    text-align:right;
+    padding:10px;
+}
 .section_swap {
     display:flex;
     justify-content:space-between;
@@ -26,4 +37,10 @@ body {
     height:40px;
     background-color: antiquewhite;
     border-radius:10px;
+}
+
+@media screen and (min-width:720px) {
+    .container {
+        width: 480px
+    }
 }

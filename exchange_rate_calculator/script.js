@@ -27,18 +27,17 @@ const addCountryToSelect = (target, data = [],initialCurrency) => {
 
 let fromCurrency = 'USD';
 let toCurrency ='KRW';
-let fromAmount = amountOne.value;
-let toAmount = amountTwo.value;
 let currencyRate = {};
-const fixedHandler = (value, digit = 2) => value.toFixed(digit)
+const fixedHandler = (value, digit = 2) => value.toFixed(digit);
+const rateTextMaker = (fromCurrency, toCurrency)=> `1 ${fromCurrency} ~ ${currencyRate[toCurrency].toFixed(2)} ${toCurrency}`;
 
 const init = async () => {
   const currencyList = await getCurrencyData('currency.json');
   addCountryToSelect(currencyOne, currencyList, fromCurrency);
   addCountryToSelect(currencyTwo, currencyList, toCurrency);
   currencyRate = (await getCurrencyData(`https://open.er-api.com/v6/latest/${fromCurrency}`))['rates'];
-  console.log(currencyRate)
-  rate.innerText = `1 ${fromCurrency} ~ ${currencyRate[toCurrency].toFixed(2)} ${toCurrency}`;
+  amountTwo.value = fixedHandler(currencyRate[toCurrency]);
+  rate.innerText = rateTextMaker(fromCurrency,toCurrency)
 };
 
 const amountHandler = (e)=>{
@@ -46,11 +45,39 @@ const amountHandler = (e)=>{
     amountTwo.value = fixedHandler(e.target.value * currencyRate[toCurrency]);
   } 
   if (e.target.id === 'amount_two') {
-    amountOne.value = Math.floor(e.target.value / currencyRate[toCurrency]);
+    amountOne.value = fixedHandler(e.target.value / currencyRate[toCurrency]);
   }
+}
+
+const currencyChangeHandler = async (e) => {
+  if (e.target.id === 'currency_one') {
+    fromCurrency = e.target.value;
+    currencyRate = (await getCurrencyData(`https://open.er-api.com/v6/latest/${fromCurrency}`))['rates'];
+    amountTwo.value = fixedHandler(amountOne.value * currencyRate[toCurrency]);
+    rate.innerText = rateTextMaker(fromCurrency, toCurrency);
+  }
+  if (e.target.id === 'currency_two') {
+    toCurrency = e.target.value;
+    amountOne.value = fixedHandler(amountTwo.value / currencyRate[toCurrency]);
+    rate.innerText = rateTextMaker(fromCurrency, toCurrency);
+  }
+}
+
+const swapHandler = async () => {
+  const tempVal = currencyOne.value;
+  currencyOne.value = currencyTwo.value;
+  currencyTwo.value = tempVal;
+  fromCurrency = currencyOne.value;
+  toCurrency = currencyTwo.value;
+  currencyRate = (await getCurrencyData(`https://open.er-api.com/v6/latest/${fromCurrency}`))['rates'];
+  amountTwo.value = fixedHandler(amountOne.value * currencyRate[toCurrency]);
+  rate.innerText = rateTextMaker(fromCurrency, toCurrency);
 }
 
 
 window.addEventListener("DOMContentLoaded", init);
-amountOne.addEventListener('input',amountHandler)
-amountTwo.addEventListener('input',amountHandler)
+amountOne.addEventListener('input',amountHandler);
+amountTwo.addEventListener('input',amountHandler);
+currencyOne.addEventListener('change', currencyChangeHandler);
+currencyTwo.addEventListener('change', currencyChangeHandler);
+swapBtn.addEventListener('click', swapHandler)
