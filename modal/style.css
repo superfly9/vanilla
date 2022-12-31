@@ -3,13 +3,19 @@
     margin:0;
     padding:0;
 }
-body {
-    transform: translateX(200px);
+:root {
+    --modal-duration: 1s;
+    --primary-color: #30336b;
+    --secondary-color: #be2edd;
 }
 .nav {
+    background-color: var(--primary-color);
+    border-right: 2px solid rgba(200, 200, 200, 0.1);
+    color: #fff;
     width:200px;
-    position:fixed;
     height:100vh;
+    position:fixed;
+    transform: translateX(-100%);
 }
 .crumb {
     margin:10px 0;
@@ -17,16 +23,92 @@ body {
 }
 .header {
     font-family: 'Single Day', cursive;
-    background-color: blueviolet;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 130%;
     text-align:center;
-    color:#fff;
     position:relative;
 }
-.toggle {
+button,
+input[type="submit"] {
+  background-color: var(--secondary-color);
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+.toggle_nav {
+    background-color: rgba(0, 0, 0, 0.3);
     position:absolute;
     top:20px;
     left:20px;
 }
 .container {
     font-family: 'Single Day', cursive;
+    margin: 0 auto;
+    max-width: 100%;
+    width: 800px;
 }
+
+.modal_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom:0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.6);
+    /* display:none; */
+    /*  width:100vw, height:100vh로도 충분 */
+}
+
+.modal_container.show_modal {
+    display:block;
+}
+
+.modal {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    width: 400px;
+    animation-name: modalopen;
+    animation-duration: var(--modal-duration);
+  }
+  
+  .modal_header {
+      display: flex;
+      justify-content: space-between;
+      align-items:center;
+      background: var(--primary-color);
+      color: #fff;
+      padding: 10px 0px 10px 20px;
+  }
+
+  .modal_header h3 {
+      margin: 0;
+  }
+
+  .modal_content {
+      padding: 20px;
+  }
+
+  .modal_form div {
+      margin: 15px 0;
+  }
+
+  .modal_form label {
+      display: block;
+      margin-bottom: 5px;
+  }
+
+  .close_btn {
+      background: transparent;
+      font-size: 25px;
+  }
