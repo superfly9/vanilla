@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
 * {
+    box-sizing:border-box;
     margin:0;
     padding:0;
 }
@@ -8,14 +9,15 @@
     --primary-color: #30336b;
     --secondary-color: #be2edd;
 }
-.nav {
-    background-color: var(--primary-color);
-    border-right: 2px solid rgba(200, 200, 200, 0.1);
-    color: #fff;
-    width:200px;
-    height:100vh;
-    position:fixed;
-    transform: translateX(-100%);
+body {
+    font-family: 'Single Day', cursive;
+    transition: transform 1s ease;
+}
+body.show_nav{
+    transform: translateX(200px);
+}
+li {
+    list-style-type: none;
 }
 .crumb {
     margin:10px 0;
@@ -29,6 +31,67 @@
     text-align:center;
     position:relative;
 }
+nav {
+    background-color: var(--primary-color);
+    border-right: 2px solid rgba(200, 200, 200, 0.1);
+    color: #fff;
+    width:200px;
+    height:100vh;
+    position:fixed;
+    transform: translateX(-100%);
+}
+nav .logo {
+    padding: 30px 0;
+    text-align: center;
+  }
+  
+  nav .logo img {
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+  }
+  
+  nav ul {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+  }
+  
+  nav ul li {
+    border-bottom: 2px solid rgba(200, 200, 200, 0.1);
+    padding: 20px;
+  }
+  
+  nav ul li:first-of-type {
+    border-top: 2px solid rgba(200, 200, 200, 0.1);
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  header {
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 130%;
+    position: relative;
+    padding: 40px 15px;
+    text-align: center;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+  header p {
+    margin: 30px 0;
+  }
+
 button,
 input[type="submit"] {
   background-color: var(--secondary-color);
@@ -46,7 +109,8 @@ input[type="submit"] {
 }
 .container {
     font-family: 'Single Day', cursive;
-    margin: 0 auto;
+    margin: 20px auto 0;
+    padding-left: 10px;
     max-width: 100%;
     width: 800px;
 }
@@ -59,7 +123,7 @@ input[type="submit"] {
     bottom:0;
     z-index: 1000;
     background-color: rgba(0, 0, 0, 0.6);
-    /* display:none; */
+    display:none;
     /*  width:100vw, height:100vh로도 충분 */
 }
 
@@ -99,8 +163,8 @@ input[type="submit"] {
       padding: 20px;
   }
 
-  .modal_form div {
-      margin: 15px 0;
+  .modal_form > div {
+    margin: 15px 0;
   }
 
   .modal_form label {
@@ -108,7 +172,23 @@ input[type="submit"] {
       margin-bottom: 5px;
   }
 
+  .modal_form .form_input {
+      padding:8px;
+      width: 100%;
+  }
+
   .close_btn {
       background: transparent;
       font-size: 25px;
   }
+
+  @keyframes modalopen {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
