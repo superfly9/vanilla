@@ -24,10 +24,6 @@ body {
     margin:auto;
     height:280px;
     width: 280px;
-    transform: scale(1);
-    background-color: #000;
-    border-radius:50%;
-    z-index:-1;
 }
 .text{
     font-size:25px;
@@ -39,7 +35,7 @@ body {
     left:0;
     border-radius:50%;
     background-color: #000;
-    z-index:-1;
+    z-index: -1;
     width:100%;
     height:100%;
 }
@@ -52,5 +48,5 @@ body {
     left:-20px;
     border-radius:50%;
     z-index:-2;
-    background-image: conic-gradient(beige 25%, rgb(39, 163, 111) 50%,pink 75%);
+    background-image: conic-gradient(beige 0 20%, rgb(107, 39, 163) 40% 60%,rgb(7, 67, 39) 75% 85%, rgb(157, 190, 10) 95%);
 }
