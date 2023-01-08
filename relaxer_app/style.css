@@ -50,3 +50,55 @@ body {
     z-index:-2;
     background-image: conic-gradient(beige 0 20%, rgb(107, 39, 163) 40% 60%,rgb(7, 67, 39) 75% 85%, rgb(157, 190, 10) 95%);
 }
+.pointer_container {
+    width:20px;
+    height:180px;
+    position:absolute;
+    bottom:140px;
+    left:130px;
+    animation:rotate 7.5s linear forwards infinite;
+    transform-origin:bottom center;
+}
+.pointer {
+    background-color:darkgray;
+    border-radius:50%;
+    width:20px;
+    height:20px;
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.container.grow {
+    animation: grow 3s linear forwards;
+  }
+  
+  @keyframes grow {
+    from {
+      transform: scale(1);
+    }
+  
+    to {
+      transform: scale(1.2);
+    }
+  }
+  
+  .container.shrink {
+    animation: shrink 3s linear forwards;
+  }
+  
+  @keyframes shrink {
+    from {
+      transform: scale(1.2);
+    }
+  
+    to {
+      transform: scale(1);
+    }
+  }
+  
