@@ -6,18 +6,15 @@ const text = qs('.text');
 const container = qs('.container');
 
 const getBreath = ()=>{
-    console.log('check')
     text.innerText = 'Breathe In';
     container.className='container grow';
     
-    const holdTimeInterval = setInterval(()=>{
+    setTimeout(()=>{
         text.innerText = 'Hold'
-        clearInterval(holdTimeInterval);
 
-        const outTimeInterval = setInterval(()=>{
+        setTimeout(()=>{
             text.innerText = 'Breath Out'
             container.className='container shrink';
-            clearInterval(outTimeInterval);
         },holdTome)
     },breatheInTime)
 }
